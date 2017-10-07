@@ -1,0 +1,12 @@
+<% include ./partials/header %>
+
+<h1>MOVIES LIST</h1>
+
+<% moviesList.forEach((movie) => { %> 
+	<img src="<%= movie.image %>">
+	<h3><%= movie.title %> - <span><%= movie.year %></span></h3>
+	<p><%= movie.summary %></p>
+<% }) %> 
+
+
+<% include ./partials/footer %>
