@@ -2,13 +2,15 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 //APP CONFIG ================================================================================
 
 mongoose.connect("mongodb://localhost/restful_movie_app", {useMongoClient: true});
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 // MONGOOSE/MODEL CONFIG ====================================================================
 const movieSchema = new mongoose.Schema({
@@ -40,7 +42,7 @@ const Movie = mongoose.model("Movie" , movieSchema);
 //ROOT ROUTE
 app.get("/", (req, res, next) => {
 	res.redirect("/movies");
-})
+});
 
 //INDEX ROUTE
 app.get("/movies", (req, res, next) => {
@@ -50,7 +52,56 @@ app.get("/movies", (req, res, next) => {
 			res.render("index", { moviesList });
 		}
 	})
-})
+});
+
+//NEW ROUTE
+app.get("/movies/new", (req, res, next) => {
+	res.render("new");
+});
+
+//CREATE ROUTE
+app.post("/movies", (req, res, next) => {
+	Movie.create(req.body.movie, (err) => {
+		if(err) console.log("YOU'VE GOT AN ERROR");
+		else {
+			res.redirect("/movies");
+		};
+	});
+});
+
+//SHOW ROUTE
+app.get("/movies/:id", (req, res, next) => {
+	Movie.findById(req.params.id, (err, foundMovie) => {
+		if(err) console.log("YOU'VE GOT AN ERROR");
+		else {
+			res.render("show", { foundMovie });
+		};
+	});
+});
+
+//EDIT ROUTE
+app.get("/movies/:id/edit", (req, res, next) => {
+	Movie.findById(req.params.id, (err, foundMovie) => {
+		if(err) console.log("YOU'VE GOT AN ERROR");
+		else {
+			// res.send("movie found!!");
+			res.render("edit", { foundMovie });
+		}
+	});
+});
+
+//UPDATE ROUTE
+app.put("/movies/:id", (req, res, next) => {
+	Movie.findByIdAndUpdate(req.params.id, req.body.movie, (err) => {
+		if(err) console.log("YOU'VE GOT AN ERROR");
+		else {
+			res.redirect("/movies/" + req.params.id);
+		};
+	})
+});
+
+
+
 
 app.listen(8080, () => {
 	console.log("listening on port 8080!!!");

@@ -5,7 +5,8 @@
 <% moviesList.forEach((movie) => { %> 
 	<img src="<%= movie.image %>">
 	<h3><%= movie.title %> - <span><%= movie.year %></span></h3>
-	<p><%= movie.summary %></p>
+	<p><%= movie.summary.substring(0, 100) %>...</p>
+	<a href="/movies/<%= movie._id%>">Learn more</a>
 <% }) %> 
 
 

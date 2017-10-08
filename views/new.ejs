@@ -1,0 +1,19 @@
+<% include ./partials/header %>
+
+<form action="/movies" method="POST">
+	<label for="title">Title</label>
+	<input id="title" type="text" name="movie[title]" placeholder="movie title">
+
+	<label for="year">Year</label>
+	<input id="year" type="number" name="movie[year]" placeholder="year">
+
+	<label for="image">Movie Poster</label>
+	<input id="image" type="text" name="movie[image]" placeholder="image">
+
+	<label for="summary">Summary</label>
+	<textarea name="movie[summary]" placeholder="summary"></textarea>
+
+	<button>Submit</button>
+</form>
+
+<% include ./partials/footer %>

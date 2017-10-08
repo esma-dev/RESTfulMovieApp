@@ -1,0 +1,11 @@
+<% include ./partials/header %>
+
+<div>
+	<img src="<%= foundMovie.image %>">
+	<h2><%= foundMovie.title %> - <span><%= foundMovie.year%></span></h2>
+	<p><%= foundMovie.summary%></p>
+
+	<button><a href="/movies/<%= foundMovie._id %>/edit">edit</a></button>
+</div>
+
+<% include ./partials/footer %>
