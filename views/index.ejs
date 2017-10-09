@@ -2,11 +2,17 @@
 
 <h1>MOVIES LIST</h1>
 
+<div class="field">
+	<button><a href="/movies/new">Add New Movie</a></button>
+</div>
+
 <% moviesList.forEach((movie) => { %> 
-	<img src="<%= movie.image %>">
-	<h3><%= movie.title %> - <span><%= movie.year %></span></h3>
-	<p><%= movie.summary.substring(0, 100) %>...</p>
-	<a href="/movies/<%= movie._id%>">Learn more</a>
+	<div>
+		<img src="<%= movie.image %>">
+		<h3><%= movie.title %> - <span><%= movie.year %></span></h3>
+		<p><%= movie.summary.substring(0, 100) %>...</p>
+		<a href="/movies/<%= movie._id%>">Learn more</a>
+	</div>
 <% }) %> 
 
 

@@ -6,6 +6,10 @@
 	<p><%= foundMovie.summary%></p>
 
 	<button><a href="/movies/<%= foundMovie._id %>/edit">edit</a></button>
+
+	<form action="/movies/<%= foundMovie._id %>?_method=DELETE" method="POST">
+		<button>delete</button>
+	</form>
 </div>
 
 <% include ./partials/footer %>

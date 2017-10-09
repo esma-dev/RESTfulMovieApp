@@ -100,7 +100,15 @@ app.put("/movies/:id", (req, res, next) => {
 	})
 });
 
-
+//DESTROY ROUTE
+app.delete("/movies/:id", (req, res, next) => {
+	Movie.findByIdAndRemove(req.params.id, (err) => {
+		if(err) console.log("YOU'VE GOT AN ERROR")
+		else {
+			res.redirect("/movies");
+		}
+	});
+});
 
 
 app.listen(8080, () => {
